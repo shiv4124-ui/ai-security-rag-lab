@@ -1,0 +1,6 @@
+[
+  {"name": "Dana Lee", "title": "Staff Engineer", "department": "Platform", "email": "dana.lee@acme.example", "salary": 214000, "ssn_last4": "4821", "manager": "Priya Shah"},
+  {"name": "Priya Shah", "title": "Director of Engineering", "department": "Platform", "email": "priya.shah@acme.example", "salary": 268000, "ssn_last4": "1937", "manager": "Marcus Webb"},
+  {"name": "Marcus Webb", "title": "CTO", "department": "Executive", "email": "marcus.webb@acme.example", "salary": 395000, "ssn_last4": "7702", "manager": null},
+  {"name": "Tom Alvarez", "title": "IT Support Specialist", "department": "IT", "email": "tom.alvarez@acme.example", "salary": 72000, "ssn_last4": "3316", "manager": "Priya Shah"}
+]
