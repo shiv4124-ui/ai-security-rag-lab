@@ -1,6 +1,7 @@
 [
-  {"name": "Dana Lee", "title": "Staff Engineer", "department": "Platform", "email": "dana.lee@acme.example", "salary": 214000, "ssn_last4": "4821", "manager": "Priya Shah"},
-  {"name": "Priya Shah", "title": "Director of Engineering", "department": "Platform", "email": "priya.shah@acme.example", "salary": 268000, "ssn_last4": "1937", "manager": "Marcus Webb"},
-  {"name": "Marcus Webb", "title": "CTO", "department": "Executive", "email": "marcus.webb@acme.example", "salary": 395000, "ssn_last4": "7702", "manager": null},
-  {"name": "Tom Alvarez", "title": "IT Support Specialist", "department": "IT", "email": "tom.alvarez@acme.example", "salary": 72000, "ssn_last4": "3316", "manager": "Priya Shah"}
+  {"name": "Dana Lee", "title": "Staff Engineer", "department": "Platform", "email": "dana.lee@acme.example", "salary": 214000, "ssn_last4": "4821", "manager": "Priya Shah", "roles": ["employee", "engineering"]},
+  {"name": "Priya Shah", "title": "Director of Engineering", "department": "Platform", "email": "priya.shah@acme.example", "salary": 268000, "ssn_last4": "1937", "manager": "Marcus Webb", "roles": ["employee", "engineering", "manager"]},
+  {"name": "Marcus Webb", "title": "CTO", "department": "Executive", "email": "marcus.webb@acme.example", "salary": 395000, "ssn_last4": "7702", "manager": null, "roles": ["employee", "exec"]},
+  {"name": "Lena Ortiz", "title": "HR Business Partner", "department": "People", "email": "lena.ortiz@acme.example", "salary": 128000, "ssn_last4": "5560", "manager": "Marcus Webb", "roles": ["employee", "hr"]},
+  {"name": "Tom Alvarez", "title": "IT Support Specialist", "department": "IT", "email": "tom.alvarez@acme.example", "salary": 72000, "ssn_last4": "3316", "manager": "Priya Shah", "roles": ["employee", "it"]}
 ]

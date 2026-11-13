@@ -26,32 +26,50 @@ class LLM:
         else:
             raise ValueError(f"Unknown backend: {backend}")
 
-    def chat(self, messages):
-        """messages: list of {"role": "system"|"user"|"assistant", "content": str}"""
-        if self.backend == "ollama":
-            url = f"{self.base_url}/api/chat"
-            payload = {
-                "model": self.model,
-                "messages": messages,
-                "stream": False,
-                "options": {"temperature": self.temperature},
-            }
-            headers = {"Content-Type": "application/json"}
-        else:
-            url = f"{self.base_url}/chat/completions"
-            payload = {"model": self.model, "messages": messages, "temperature": self.temperature}
-            headers = {"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"}
-
-        req = urllib.request.Request(url, data=json.dumps(payload).encode(), headers=headers)
+    def _request(self, url, payload=None, headers=None, timeout=300):
+        data = json.dumps(payload).encode() if payload is not None else None
+        req = urllib.request.Request(url, data=data, headers=headers or {})
         try:
-            with urllib.request.urlopen(req, timeout=300) as resp:
-                data = json.loads(resp.read())
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read())
         except urllib.error.HTTPError as e:
             raise RuntimeError(f"LLM API error {e.code}: {e.read().decode(errors='replace')[:500]}")
         except urllib.error.URLError as e:
             hint = " Is Ollama running? Try: ollama serve" if self.backend == "ollama" else ""
             raise RuntimeError(f"Could not reach {url}: {e.reason}.{hint}")
 
+    def chat(self, messages, max_tokens=None):
+        """messages: list of {"role": "system"|"user"|"assistant", "content": str}"""
         if self.backend == "ollama":
+            options = {"temperature": self.temperature}
+            if max_tokens:
+                options["num_predict"] = max_tokens
+            data = self._request(
+                f"{self.base_url}/api/chat",
+                {"model": self.model, "messages": messages, "stream": False, "options": options},
+                {"Content-Type": "application/json"},
+            )
             return data["message"]["content"]
+
+        payload = {"model": self.model, "messages": messages, "temperature": self.temperature}
+        if max_tokens:
+            payload["max_tokens"] = max_tokens
+        data = self._request(
+            f"{self.base_url}/chat/completions",
+            payload,
+            {"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
+        )
         return data["choices"][0]["message"]["content"]
+
+    def model_digest(self):
+        """Ollama only: the digest of the installed model build, or None."""
+        if self.backend != "ollama":
+            return None
+        try:
+            tags = self._request(f"{self.base_url}/api/tags", timeout=10)
+        except RuntimeError:
+            return None
+        for m in tags.get("models", []):
+            if m.get("name") == self.model or m.get("model") == self.model:
+                return m.get("digest")
+        return None

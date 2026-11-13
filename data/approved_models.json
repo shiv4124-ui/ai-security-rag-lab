@@ -1,0 +1,10 @@
+{
+  "_comment": "LLM04 Supply Chain: models this app is allowed to run in secure mode. Add the digest from `ollama show <model> --modelfile` or `ollama list` to pin an exact build.",
+  "ollama": {
+    "llama3.2:3b": {"source": "ollama.com/library/llama3.2", "digest": ""},
+    "qwen2.5:7b": {"source": "ollama.com/library/qwen2.5", "digest": ""}
+  },
+  "openai": {
+    "gpt-4o-mini": {"source": "api.openai.com"}
+  }
+}

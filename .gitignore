@@ -1,4 +1,7 @@
 __pycache__/
 *.pyc
 outbox.log
+transcript.html
+docs/kb_notes/
+data/pending_notes/
 .venv/

@@ -1,0 +1,7 @@
+[
+  {"id": 101, "title": "VPN disconnects every hour", "status": "open", "owner": "Dana Lee"},
+  {"id": 102, "title": "Laptop battery swelling", "status": "open", "owner": "Priya Shah"},
+  {"id": 103, "title": "Password reset not working", "status": "closed", "owner": "Tom Alvarez"},
+  {"id": 104, "title": "Request access to payroll dashboard", "status": "open", "owner": "Lena Ortiz"},
+  {"id": 105, "title": "Monitor flickering", "status": "closed", "owner": "Dana Lee"}
+]
